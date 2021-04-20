@@ -22,8 +22,6 @@
 
 Here is how I have addressed each rubric point.
 
-### Explain the Starter Code
-
 #### 1. Explain the functionality of what's provided in `motion_planning.py` and `planning_utils.py`
 
 motion_planning.py is different from backyard_flyer_solution.py in the sense that it uses plan_path() method to generate waypoints and define drone path wherease backyard_flyer_solution.py uses the calculate_box() method to define set 4 waypoints and there is no planning involved. In motion_planning.py, we are using an additional state of PLANNING to generate the waypoints.
@@ -31,44 +29,24 @@ motion_planning.py is different from backyard_flyer_solution.py in the sense tha
 After implementing 3D motion planning, here is an image of my drone in action
 ![Top Down View](./drone1.jpg)
 
+
+
 ### Implementing Your Path Planning Algorithm
 
 #### 1. Set your global home position
-Here students should read the first line of the csv file, extract lat0 and lon0 as floating point values and use the self.set_home_position() method to set global home. Explain briefly how you accomplished this in your code.
-
-
-And here is a lovely picture of our downtown San Francisco environment from above!
-![Map of SF](./misc/map.png)
+Home position was set at line number 137 of motion_planning.py.
 
 #### 2. Set your current local position
-Here as long as you successfully determine your local position relative to global home you'll be all set. Explain briefly how you accomplished this in your code.
-
-
-Meanwhile, here's a picture of me flying through the trees!
-![Forest Flying](./misc/in_the_trees.png)
+Current local position is set according to global_position using global_to_local method at line number 145 of motion_planning.py.
 
 #### 3. Set grid start position from local position
-This is another step in adding flexibility to the start location. As long as it works you're good to go!
+north and east start positions are set from local position.
 
 #### 4. Set grid goal position from geodetic coords
-This step is to add flexibility to the desired goal location. Should be able to choose any (lat, lon) within the map and have it rendered to a goal location on the grid.
+grid_goal position is set using the north and east start positions by adding to the relative offsets.
 
 #### 5. Modify A* to include diagonal motion (or replace A* altogether)
-Minimal requirement here is to modify the code in planning_utils() to update the A* implementation to include diagonal motions on the grid that have a cost of sqrt(2), but more creative solutions are welcome. Explain the code you used to accomplish this step.
+Diagonal motion was achieved by adding them to Action enum under planning_utils.py.
 
 #### 6. Cull waypoints 
-For this step you can use a collinearity test or ray tracing method like Bresenham. The idea is simply to prune your path of unnecessary waypoints. Explain the code you used to accomplish this step.
-
-
-
-### Execute the flight
-#### 1. Does it work?
-It works!
-
-### Double check that you've met specifications for each of the [rubric](https://review.udacity.com/#!/rubrics/1534/view) points.
-  
-# Extra Challenges: Real World Planning
-
-For an extra challenge, consider implementing some of the techniques described in the "Real World Planning" lesson. You could try implementing a vehicle model to take dynamic constraints into account, or implement a replanning method to invoke if you get off course or encounter unexpected obstacles.
-
-
+prune_path was used to minimize the number of waypoints.
