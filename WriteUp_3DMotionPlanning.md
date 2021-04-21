@@ -46,7 +46,7 @@ north and east start positions are set from local position.
 grid_goal position is set using the north and east start positions by adding to the relative offsets.
 
 #### 5. Modify A* to include diagonal motion (or replace A* altogether)
-Diagonal motion was achieved by adding them to Action enum under planning_utils.py.
+Search was performed using A*
 
 #### 6. Cull waypoints 
 prune_path was used to minimize the number of waypoints.
